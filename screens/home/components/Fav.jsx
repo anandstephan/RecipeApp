@@ -1,22 +1,23 @@
 import {View,Image,StyleSheet,Pressable} from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-const Recipe = (props) =>{
+const Fav = (props) =>{
 
     const navigation =  useNavigation()
     const onPressHandler= () =>{
-        navigation.navigate('Info',{info:props})
+        const newObj = {image:props.imageUrl,label:props.title,calories:props.cal,totalWeight:props.weight,ingredients:JSON.parse(props.newIngredients),isFav:true}
+        navigation.navigate('Info',{info:newObj})
     }
 return <Pressable onPress={onPressHandler}> 
 <View style={styles.container}>   
     <Image
-    source={{uri:props.image}}
+    source={{uri:props.imageUrl}}
     style={styles.image}
     />
 </View>
 </Pressable>
 }
 
-export default Recipe
+export default Fav
 
 const styles = StyleSheet.create({
     container:{

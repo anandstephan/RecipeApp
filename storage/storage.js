@@ -30,19 +30,20 @@ export const login = async (email,password) =>{
     }
 }
 
-export const createMemories = async (id,title,body,img) =>{
+export const addToFavorites = async (imageUrl,title,cal,weight,ingredients) =>{
   
    try {
-    let memories ;
-    let response = await getMemories()
+    let favorites ;
+    let response = await getFavorites()
     if(response === null){
-        memories=[]
+        favorites=[]
     }else{
-        memories = response
+        favorites = response
     }
-    memories.push({id,title,body,img,likes:[]})
-    await AsyncStorage.setItem("memories",JSON.stringify(memories))
-    return "Memory Created"
+    let newIngredients = JSON.stringify(ingredients)
+    favorites.push({imageUrl,title,cal,weight,newIngredients})
+    await AsyncStorage.setItem("Favorites",JSON.stringify(favorites))
+    return "Favorite Added"
    } catch (error) {
     return  Alert.alert("Error",error.message);  
    } 
@@ -67,9 +68,9 @@ export const deleteUserDetail = async () =>{
     }
 }
 
-export const getMemories = async () =>{
+export const getFavorites = async () =>{
     try {
-        const response = await AsyncStorage.getItem("memories")
+        const response = await AsyncStorage.getItem("Favorites")
         if(response===null) return null;
         return JSON.parse(response);
         
@@ -78,15 +79,16 @@ export const getMemories = async () =>{
     }
 }
 
-export const deletePost = async (id) =>{
+export const deleteFav = async (title) =>{
     try {
-        const memories = JSON.parse(await AsyncStorage.getItem('memories'))
-        memories.forEach((memory,index)=>{
-            if(memory.id === id)
-            memories.splice(index,1);
+        const favorites = JSON.parse(await AsyncStorage.getItem('Favorites'))
+        console.log(favorites)
+        favorites.forEach((fav,index)=>{
+            if(fav.title === title)
+            favorites.splice(index,1);
         })
-        await AsyncStorage.setItem("memories",JSON.stringify(memories))
-        return "Delete Post"
+        await AsyncStorage.setItem("Favorites",JSON.stringify(favorites))
+        return "Delete Favorites"
 
     } catch (error) {
         Alert.alert("Error",error.message);      
@@ -123,7 +125,6 @@ export const likePost = async (postId,likeId) =>{
         await memories.forEach(mem => {
             if(mem.id === postId){
                 // console.log(mem.likes,mem.likes.push(likeId))
-                console.log("Like",mem.id)
                 mem.likes.push(likeId)
             }
         })

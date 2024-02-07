@@ -1,34 +1,48 @@
 import { useEffect, useState } from "react"
-import { View,TextInput,StyleSheet,FlatList } from "react-native"
+import { View,TextInput,StyleSheet,FlatList,Button } from "react-native"
 import Recipe from "./components/Recipe"
 
 
 const Home = () =>{
-const [input,setInput] = useState('momo')
-const [data,setData] = useState([])
-const APP_ID = 'dc34792b';
-const APP_KEY = '3eab1a651f78f58e8b394f905f3efa21'
-const getRecipes = async () =>{
-    const response = await fetch(`https://api.edamam.com/search?q=${input}&app_id=${APP_ID}&app_key=${APP_KEY}`);
-    const data = await response.json()
-    console.log(data.hits)
-    setData(data.hits)
-    // setRecipes(data.hits)
-  }
+    const [recipes,setRecipes] = useState([]);
+    const [search,setSearch] = useState('');
+    const [query,setQuery] = useState('chicken');
+    const APP_ID = 'dc34792b';
+    const APP_KEY = '3eab1a651f78f58e8b394f905f3efa21'
 
-useEffect(()=>{
+    
+    useEffect(() =>{
     getRecipes()
-},[input])
-console.log(input)
+    },[query])
+    
+    const getRecipes = async () =>{
+      const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
+      const data = await response.json()
+      // console.log(response)
+      // console.log(data)
+      setRecipes(data.hits)
+    }
+    const getSearch = e =>{
+      e.preventDefault();
+      console.log("hi")
+      setQuery(search)
+      setSearch('')
+    }
+
+
 return <View >
         <TextInput style={styles.input}
         placeholder="Enter the Recipe Name..."
-        onChangeText={setInput}
-       value={input}
+        onChangeText={text => setSearch(text)}
+       value={search}
+       />
+       <Button
+       title="submit"
+       onPress={getSearch}
        />
        <FlatList
        renderItem={({item})=><Recipe {...item.recipe}/>}
-       data={data}
+       data={recipes}
        />
 </View>
 }

@@ -12,21 +12,19 @@ const Stack = createStackNavigator();
 const  Navigation = () => {
   const navigation = useNavigation()
   const [initialRouteName,setInitialRouteName] = useState('Login')
+  const [isLogin,setIsLogin] = useState(false)
   
   const focused = useIsFocused()
-  if(focused){
-
-  }
   useEffect(()=>{
     async function getDetail(){
       const res = await getUserDetail()
-      console.log("hi,",res)
-      setInitialRouteName('Feed')
+      if(res!==null)
+      setIsLogin(prev => !prev)
     }
-    // getDetail()
+    getDetail()
   },[])
 
-  return false ? <Auth/> : <BottomNavigation/>
+  return isLogin ? <BottomNavigation setIsLogin={setIsLogin}/> :<Auth setIsLogin={setIsLogin}/>
 }
 
 export default Navigation

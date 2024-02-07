@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { login } from "../../storage/storage";
 
  
-  const Login = () => {
+  const Login = ({setIsLogin}) => {
     // state manangement
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -30,7 +30,7 @@ import { login } from "../../storage/storage";
           if(res === "There is no User yet please signup first"){
              Alert.alert("Message",res,[{text:'Ok',onPress:()=>navigation.navigate("Signup")}]);
           }else if(res === "You're Successfully Login"){
-             Alert.alert("Message",res,[{text:'Ok',onPress:()=>navigation.navigate("Feed")}]);
+             Alert.alert("Message",res,[{text:'Ok',onPress:()=>setIsLogin(prev => !prev)}]);
           }
         }
 
