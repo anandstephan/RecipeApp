@@ -18,7 +18,7 @@ const Favorite = () =>{
 
     
 
-    return fav.length===0 ? <View style={styles.container}>
+    return fav?.length===0 ? <View style={styles.container}>
         <Text style={{color:GlobalStyles.colors.accent500,fontSize:20}}>No Favorites Right Now</Text>
     </View>
     :
