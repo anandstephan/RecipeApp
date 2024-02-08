@@ -12,6 +12,7 @@ import {
   import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { login } from "../../storage/storage";
+import { GlobalStyles } from "../../constants/styles";
 
  
   const Login = ({setIsLogin}) => {
@@ -37,12 +38,12 @@ import { login } from "../../storage/storage";
     };
   
     return (
-      <ScrollView style={{backgroundColor:"#000"}}>
+      <ScrollView style={{backgroundColor:GlobalStyles.colors.primary500}}>
       <View style={styles.container}>
         <KeyboardAvoidingView>
           <View style={styles.header}>
             <Image
-              source={require("../../images/logo.jpeg")}
+              source={require("../../images/newlogo.png")}
               style={styles.imageStyle}
               resizeMode="contain"
             />
@@ -113,7 +114,7 @@ import { login } from "../../storage/storage";
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#000",
+      backgroundColor: GlobalStyles.colors.primary500,
       padding: 10,
       alignItems: "center",
      
@@ -125,13 +126,13 @@ import { login } from "../../storage/storage";
     },
     textStyle: {
       marginTop: 30,
-      color: "#39B68D",
+      color: GlobalStyles.colors.accent500,
       fontSize: 19,
       fontWeight: "600",
     },
     imageStyle: {
-      width: "80%",
-      aspectRatio: 6, // Adjust the aspect ratio based on the image's original aspect ratio
+      width: "40%",
+      aspectRatio: 1, // Adjust the aspect ratio based on the image's original aspect ratio
     },
     formStyle: {
       marginTop: 40,
@@ -141,13 +142,13 @@ import { login } from "../../storage/storage";
       alignItems: "center",
     },
     textField: {
-      color: "#f2f2f3",
+      color: '#FFFFFF',
       fontSize: 16,
       fontWeight: "500",
       marginBottom: 10, // Add margin-bottom to separate text from TextInput
     },
     textInputStyle: {
-      borderBottomColor: "#333",
+      borderBottomColor: "#FFF",
       borderBottomWidth: 1,
       marginVertical: -5,
       width: 300,
@@ -156,7 +157,7 @@ import { login } from "../../storage/storage";
     },
     buttonStyle: {
       width: 200,
-      backgroundColor: "#39B68D",
+      backgroundColor: GlobalStyles.colors.accent500,
       padding: 15,
       marginTop: 60,
       borderRadius: 6,
@@ -171,7 +172,7 @@ import { login } from "../../storage/storage";
     },
  
     registerUserStyle: {
-      color: "gray",
+      color: "#FFF",
       fontSize: 15,
       fontWeight: "600",
       // textAlign : 'center'

@@ -14,6 +14,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { getUserDetail, signup } from "../../storage/storage";
 import shortid from "shortid";
+import { GlobalStyles } from "../../constants/styles";
   
   const Signup = () => {
     // state management
@@ -42,13 +43,13 @@ import shortid from "shortid";
     };
   
     return (
-        <ScrollView style={{backgroundColor: "#000"}}>
+        <ScrollView style={{backgroundColor:GlobalStyles.colors.primary500}}>
       <View style={styles.container}>
        
         <KeyboardAvoidingView>
           <View style={styles.header}>
             <Image
-              source={require("../../images/logo.jpeg")}
+              source={require("../../images/newlogo.png")}
               style={styles.imageStyle}
               resizeMode="contain"
             />
@@ -127,36 +128,36 @@ import shortid from "shortid";
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "white",
+      backgroundColor: GlobalStyles.colors.primary500,
       padding: 10,
       alignItems: "center",
-      backgroundColor: "#000",
+  
     },
     header: {
-      marginTop: 100,
+      // marginTop: 100,
       justifyContent: "center",
       alignItems: "center",
     },
     textStyle: {
-      color: "#39B68D",
+      color: GlobalStyles.colors.accent500,
       fontSize: 17,
       fontWeight: "600",
     },
     textField: {
       fontSize: 18,
       fontWeight: "600",
-      color: "#f2f2f3",
+      color: "#FFF",
     },
     textInput: {
       borderBottomColor: "gray",
       borderBottomWidth: 1,
       marginVertical: 10,
       width: 300,
-      color: "#f1f1f1",
+      color: "#FFF",
     },
     registerButton: {
       width: 200,
-      backgroundColor: "#39B68D",
+      backgroundColor: GlobalStyles.colors.accent500,
       padding: 15,
       marginTop: 50,
       marginLeft: "auto",
@@ -165,13 +166,13 @@ import shortid from "shortid";
     },
     loginUser: {
       textAlign: "center",
-      color: "gray",
+      color: "#FFF",
       fontSize: 16,
       fontWeight: "600",
     },
     imageStyle: {
-      marginLeft: "5%",
-      width: "200%",
+      // marginLeft: "5%",
+      width: "80%",
       // aspectRatio: 6, // Adjust the aspect ratio based on the image's original aspect ratio
     },
     buttonTextStyle: {

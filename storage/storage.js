@@ -95,62 +95,7 @@ export const deleteFav = async (title) =>{
     }
 }
 
-export const editPost = async id =>{
-    try {
-        const allPost = await getMemories()
-        const filteredPost = allPost.filter(post => post.id===id)
-        return filteredPost[0]
-    } catch (error) {
-        Alert.alert("Error",error);       
-    }   
-}
 
-export const resavePost = async (id,title,body,pic) =>{
-    const memories = await getMemories()
-    memories.forEach(mem => {
-        if(mem.id === id){
-            mem.title = title;
-            mem.body = body;
-            mem.img = pic
-        }
-    })
-    await AsyncStorage.setItem("memories",JSON.stringify(memories))
-    return "Memory Updated"
-}
 
-export const likePost = async (postId,likeId) =>{
-    try {
-        const memories = await getMemories()
-     
-        await memories.forEach(mem => {
-            if(mem.id === postId){
-                // console.log(mem.likes,mem.likes.push(likeId))
-                mem.likes.push(likeId)
-            }
-        })
-        console.log("newMem",memories)
-        await AsyncStorage.setItem("memories",JSON.stringify(memories))
-        // return "Like"
 
-    } catch (error) {
 
-        Alert.alert("Error4",error.message);     
-    }
-}
-export const UnLikePost = async (postId,UnLikeId) =>{
-    try {
-        const memories = await getMemories()
-        memories.forEach(mem => {
-            if(mem.id === postId){
-                console.log("unLike",mem.id)
-                mem.likes = mem.likes.filter(like => like !== UnLikeId )
-            }
-        })
-        console.log("newMem",memories)
-        await AsyncStorage.setItem("memories",JSON.stringify(memories))
-        return "UnLike"
-
-    } catch (error) {
-        Alert.alert("Error",error.message);     
-    }
-}
